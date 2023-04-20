@@ -121,7 +121,7 @@ CREATE TABLE movies (
 
 CREATE TABLE actors (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    actor TEXT
+    full_name TEXT
 );
 
 CREATE TABLE castings (
@@ -139,7 +139,7 @@ VALUES  ("Batman Begins",2005,"PG-13","Warner Bros."),
         ("The Dark Knight",2008,"PG-13","Warner Bros."),
         ("The Dark Knight Rises",2012,"PG-13","Warner Bros.");
 
-INSERT INTO actors (actor)
+INSERT INTO actors (full_name)
 VALUES  ("Christian Bale"),
         ("Michael Caine"),
         ("Liam Neeson"),
@@ -184,7 +184,11 @@ SELECT title, year_released, MPAA_rating, studio FROM movies;
 .print "========"
 .print ""
 
-
 -- The SQL statement for the cast output
 
-SELECT title actor character_name from X;
+SELECT movies.title, actors.full_name, castings.character_name
+FROM castings   INNER JOIN movies ON castings.movie_id == movies.id 
+                INNER JOIN actors ON castings.actor_id == actors.id
+
+GROUP BY movies.title
+ORDER BY movies.year_released;
