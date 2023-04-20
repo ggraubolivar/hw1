@@ -106,7 +106,6 @@
 -- Drop existing tables, so you'll start fresh each time this script is run.
 
 DROP TABLE IF EXISTS movies;
-DROP TABLE IF EXISTS studios;
 DROP TABLE IF EXISTS actors;
 DROP TABLE IF EXISTS castings;
 
@@ -122,27 +121,53 @@ CREATE TABLE movies (
 
 CREATE TABLE actors (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT
+    actor TEXT
 );
 
 CREATE TABLE castings (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    actor_id INTEGER,
     movie_id INTEGER,
-    character_name
+    actor_id INTEGER,
+    character_name TEXT
 );
 
 -- Insert data into your database that reflects the sample data shown above
 -- Use hard-coded foreign key IDs when necessary
 
 INSERT INTO movies (title,year_released,MPAA_rating,studio)
-VALUES  ("Batman Begins",2005,"PG-13","Warner Bros.");
+VALUES  ("Batman Begins",2005,"PG-13","Warner Bros."),
+        ("The Dark Knight",2008,"PG-13","Warner Bros."),
+        ("The Dark Knight Rises",2012,"PG-13","Warner Bros.");
 
-INSERT INTO movies (title,year_released,MPAA_rating,studio)
-VALUES  ("The Dark Knight",2008,"PG-13","Warner Bros.");
+INSERT INTO actors (actor)
+VALUES  ("Christian Bale"),
+        ("Michael Caine"),
+        ("Liam Neeson"),
+        ("Katie Holmes"),
+        ("Gary Oldman"),
+        ("Heath Ledger"),
+        ("Aaron Eckhart"),
+        ("Maggie Gyllenhaal"),
+        ("Tom Hardy"),
+        ("Joseph Gordon-Levitt"),
+        ("Anne Hathaway");
 
-INSERT INTO movies (title,year_released,MPAA_rating,studio)
-VALUES  ("The Dark Knight Rises",2012,"PG-13","Warner Bros.");
+INSERT INTO castings (movie_id, actor_id, character_name)
+VALUES  (1,1,"Bruce Wayne"),
+        (1,2,"Alfred"),
+        (1,3,"Ra's Al Ghul"),
+        (1,4,"Rachel Dawes"),
+        (1,5,"Commissioner Gordon"),
+        (2,1,"Bruce Wayne"),
+        (2,6,"Joker"),
+        (2,7,"Harvey Dent"),
+        (2,2,"Alfred"),
+        (2,8,"Rachel Dawes"),
+        (3,1,"Bruce Wayne"),
+        (3,5,"Commissioner Gordon"),
+        (3,9,"Bane"),
+        (3,10,"John Blake"),
+        (3,11,"Selina Kyle");
 
 -- Prints a header for the movies output
 .print "Movies"
@@ -161,4 +186,5 @@ SELECT title, year_released, MPAA_rating, studio FROM movies;
 
 
 -- The SQL statement for the cast output
--- TODO!
+
+SELECT title actor character_name from X;
