@@ -190,5 +190,5 @@ SELECT movies.title, actors.full_name, castings.character_name
 FROM castings   INNER JOIN movies ON castings.movie_id == movies.id 
                 INNER JOIN actors ON castings.actor_id == actors.id
 
-GROUP BY movies.title
-ORDER BY movies.year_released;
+-- I made sure to create the joiner model "castings" taking the auto-created ids from the other models.
+-- Could we have also done this exercise by using the "CREATE TAVLE FROM CSV" commands in the "Aribnb" exercise?
