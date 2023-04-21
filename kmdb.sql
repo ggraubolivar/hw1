@@ -106,6 +106,7 @@
 -- Drop existing tables, so you'll start fresh each time this script is run.
 
 DROP TABLE IF EXISTS movies;
+DROP TABLE IF EXISTS studios;
 DROP TABLE IF EXISTS actors;
 DROP TABLE IF EXISTS castings;
 
@@ -116,7 +117,12 @@ CREATE TABLE movies (
     title TEXT,
     year_released INTEGER,
     MPAA_rating TEXT,
-    studio TEXT
+    studio_id INTEGER
+);
+
+CREATE TABLE studios (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    studio_name TEXT 
 );
 
 CREATE TABLE actors (
@@ -134,10 +140,13 @@ CREATE TABLE castings (
 -- Insert data into your database that reflects the sample data shown above
 -- Use hard-coded foreign key IDs when necessary
 
-INSERT INTO movies (title,year_released,MPAA_rating,studio)
-VALUES  ("Batman Begins",2005,"PG-13","Warner Bros."),
-        ("The Dark Knight",2008,"PG-13","Warner Bros."),
-        ("The Dark Knight Rises",2012,"PG-13","Warner Bros.");
+INSERT INTO movies (title,year_released,MPAA_rating,studio_id)
+VALUES  ("Batman Begins",2005,"PG-13",1),
+        ("The Dark Knight",2008,"PG-13",1),
+        ("The Dark Knight Rises",2012,"PG-13",1);
+
+INSERT INTO studios (studio_name)
+VALUES ("Warner Bros.");
 
 INSERT INTO actors (full_name)
 VALUES  ("Christian Bale"),
@@ -176,7 +185,8 @@ VALUES  (1,1,"Bruce Wayne"),
 
 -- The SQL statement for the movies output
 
-SELECT title, year_released, MPAA_rating, studio FROM movies;
+SELECT movies.title, movies.year_released, movies.MPAA_rating, studios.studio_name
+FROM movies INNER JOIN studios ON movies.studio_id == studios.id;
 
 -- Prints a header for the cast output
 .print ""
